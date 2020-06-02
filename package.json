@@ -1,0 +1,23 @@
+{
+  "name": "super_mario",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve ./public", 
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Swarbzz/Super_Mario.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Swarbzz/Super_Mario/issues"
+  },
+  "homepage": "https://github.com/Swarbzz/Super_Mario#readme",
+  "dependencies": {
+    "serve": "^11.3.1"
+  }
+}
