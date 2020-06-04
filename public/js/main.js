@@ -14,7 +14,7 @@ function loadMarioSprite() {
   return loadImage('/image/characters.gif')
   .then(image => {
     const sprites = new SpriteSheet(image, 16, 16);
-    sprites.define('idle', 17, 3); // selects the ground tile 
+    sprites.define('idle', 276, 44, 16, 16); //selects mario
     return sprites;
   });
 }
@@ -22,8 +22,8 @@ function loadBackgroundSprites() {
   return loadImage('/image/tiles.png')
   .then(image => {
     const sprites = new SpriteSheet(image, 16, 16);
-    sprites.define('ground', 0, 0); // selects the ground tile 
-    sprites.define('sky', 3, 23); // selects the sky tile
+    sprites.defineTile('ground', 0, 0); // selects the ground tile 
+    sprites.defineTile('sky', 3, 23); // selects the sky tile
     return sprites;
   });
 }
