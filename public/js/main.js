@@ -22,5 +22,17 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
   level.backgrounds.forEach(background => {
     drawBackground(background, context, sprites); //selects the tiles in 1-1.json via the arrays and displays them
   });
-  marioSprite.draw('idle', context, 64, 64);
+
+  const pos = {
+    x: 64,
+    y: 64,
+  };
+
+  function update() {
+    marioSprite.draw('idle', context, pos.x, pos.y);
+    pos.x += 2;
+    pos.y += 2;
+    requestAnimationFrame(update);
+  }
+  update();
 });
