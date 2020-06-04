@@ -22,13 +22,8 @@ loadImage('/image/tiles.png')
 
   loadLevel('1-1')
   .then(level => {
-    console.log(level);
-    drawBackground(level.backgrounds[0], context, sprites);
+    level.backgrounds.forEach(background => {
+      drawBackground(background, context, sprites); //selects the tiles in 1-1.json via the arrays and displays them
+    });
   });
-  
-  for (let x = 0; x < 25; ++x) { //width of the ground
-    for (let y = 12; y < 14; ++ y) { // length of the ground
-      sprites.drawTile('ground',context, x, y); //this line determines where it should be displayed on the page
-    }
-  }
 });
