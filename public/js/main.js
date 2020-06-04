@@ -19,8 +19,12 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
   loadLevel('1-1'),
 ])
 .then(([marioSprite,sprites,level]) => {
+  const backgroundBuffer = document.createElement('canvas');
+  backgroundBuffer.width = 256;
+  backgroundBuffer.height = 240;
+
   level.backgrounds.forEach(background => {
-    drawBackground(background, context, sprites); //selects the tiles in 1-1.json via the arrays and displays them
+    drawBackground(background, backgroundBuffer.getContext('2d'), sprites); //selects the tiles in 1-1.json via the arrays and displays them
   });
 
   const pos = {
@@ -29,6 +33,7 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
   };
 
   function update() {
+    context.drawImage(backgroundBuffer, 0, 0);
     marioSprite.draw('idle', context, pos.x, pos.y);
     pos.x += 2;
     pos.y += 2;
