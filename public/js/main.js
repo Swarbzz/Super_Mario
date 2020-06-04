@@ -10,20 +10,25 @@ function drawBackground(background, context, sprites) {
     }  
   });
 }
+function loadBackgroundSprites() {
+  return loadImage('/image/tiles.png')
+  .then(image => {
+    const sprites = new SpriteSheet(image, 16, 16); //this line determines which tile to select
+    sprites.define('ground', 0, 0); // selects the ground tile 
+    sprites.define('sky', 3, 23); // selects the sky tile
+    return sprites;
+  });
+}
 
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
-loadImage('/image/tiles.png')
-.then(image => {
-  const sprites = new SpriteSheet(image, 16, 16); //this line determines which tile to select
-  sprites.define('ground', 0, 0); // selects the ground tile 
-  sprites.define('sky', 3, 23); // selects the sky tile
-
-  loadLevel('1-1')
-  .then(level => {
-    level.backgrounds.forEach(background => {
-      drawBackground(background, context, sprites); //selects the tiles in 1-1.json via the arrays and displays them
-    });
+Promise.all([
+  loadBackgroundSprites(),
+  loadLevel('1-1'),
+])
+.then(([sprites,level]) => {
+  level.backgrounds.forEach(background => {
+    drawBackground(background, context, sprites); //selects the tiles in 1-1.json via the arrays and displays them
   });
 });
