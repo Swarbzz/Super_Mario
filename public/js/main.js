@@ -1,3 +1,4 @@
+import Compositor from './compsitor.js'
 import {loadLevel} from './Loaders.js';
 import {loadBackgroundSprites, loadMarioSprite} from './sprites.js';
 
@@ -12,17 +13,6 @@ function drawBackground(background, context, sprites) {
 }
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
-
-class Compositor {
-  constructor() {
-    this.layers = [];
-  }
-  draw(context) {
-    this.layers.forEach(layer => {
-      layer(context); //layer is a function that draws on the context
-    });
-  }
-}
 
 function createBackgroundLayer(backgrounds, sprites) {
   const buffer = document.createElement('canvas');
