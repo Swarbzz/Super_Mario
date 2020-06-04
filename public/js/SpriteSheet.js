@@ -28,4 +28,4 @@ export default class SpriteSheet {
   drawTile(name, context, x, y) {
     this.draw(name, context, x* this.width, y * this.height); //multipled by 16 because the draw function doesn't include tile sizes
   }
-  }
+}

@@ -6,4 +6,9 @@ export function loadImage(url) {
     });
     image.src = url;
   });
-  }
+}
+
+export function loadLevel(name) {
+  return fetch(`./Levels/${name}.json`)
+  .then(r => r.json());
+}
