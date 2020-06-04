@@ -10,10 +10,18 @@ function drawBackground(background, context, sprites) {
     }  
   });
 }
+function loadMarioSprite() {
+  return loadImage('/image/characters.gif')
+  .then(image => {
+    const sprites = new SpriteSheet(image, 16, 16);
+    sprites.define('idle', 17, 3); // selects the ground tile 
+    return sprites;
+  });
+}
 function loadBackgroundSprites() {
   return loadImage('/image/tiles.png')
   .then(image => {
-    const sprites = new SpriteSheet(image, 16, 16); //this line determines which tile to select
+    const sprites = new SpriteSheet(image, 16, 16);
     sprites.define('ground', 0, 0); // selects the ground tile 
     sprites.define('sky', 3, 23); // selects the sky tile
     return sprites;
@@ -23,12 +31,14 @@ function loadBackgroundSprites() {
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
-Promise.all([
+Promise.all([ //allows sprites and level to load at the same time instead of one after another. 
+  loadMarioSprite(),
   loadBackgroundSprites(),
   loadLevel('1-1'),
 ])
-.then(([sprites,level]) => {
+.then(([marioSprite,sprites,level]) => {
   level.backgrounds.forEach(background => {
     drawBackground(background, context, sprites); //selects the tiles in 1-1.json via the arrays and displays them
   });
+  marioSprite.draw('idle', context, 64, 64);
 });
