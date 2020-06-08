@@ -24,7 +24,7 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
 
   const pos = {
     x: 64,
-    y: 64,
+    y: 180,
   };
 
   const vel = {
@@ -39,6 +39,7 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
     comp.draw(context)
     pos.x += vel.x;
     pos.y += vel.y;
+    vel.y += 0.5; // adding gravity
     requestAnimationFrame(update);
   }
   update();
