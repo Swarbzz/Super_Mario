@@ -6,9 +6,9 @@ import {createBackgroundLayer} from './layers.js';
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
-function createSpriteLayer(sprite, pos) {
+function createSpriteLayer(entity) {
   return function drawSpriteLayer(context) {
-      sprite.draw('idle', context, pos.x, pos.y);
+    entity.draw(context);
     }
 }
 
@@ -45,12 +45,16 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
   mario.pos.set(64, 180);
   mario.vel.set(2, -10);
 
-  mario.update = function updateMarion() {
+  mario.draw = function drawMarion(context) {
+    marioSprite.draw('idle', context, this.pos.x, this.pos.y);
+  }
+
+  mario.update = function updateMario() {
     this.pos.x += this.vel.x;
     this.pos.y += this.vel.y;
   }
 
-  const spriteLayer = createSpriteLayer(marioSprite, mario.pos);
+  const spriteLayer = createSpriteLayer(mario);
   comp.layers.push(spriteLayer);
 
   function update() {
