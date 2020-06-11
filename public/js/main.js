@@ -2,16 +2,10 @@ import Compositor from './compsitor.js';
 import {loadLevel} from './Loaders.js';
 import {createMario} from './entities.js';
 import {loadBackgroundSprites} from './sprites.js';
-import {createBackgroundLayer} from './layers.js';
+import {createBackgroundLayer, createSpriteLayer} from './layers.js';
 
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
-
-function createSpriteLayer(entity) {
-  return function drawSpriteLayer(context) {
-    entity.draw(context);
-    }
-}
 
 Promise.all([ //allows sprites and level to load at the same time instead of one after another. 
   createMario(),
