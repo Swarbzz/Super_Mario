@@ -1,4 +1,5 @@
 import Compositor from './compsitor.js';
+import Timer from './timer.js';
 import {loadLevel} from './Loaders.js';
 import {createMario} from './entities.js';
 import {loadBackgroundSprites} from './sprites.js';
@@ -15,18 +16,20 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
 .then(([mario, backgroundSprites, level]) => {
   const comp = new Compositor();
   const backgroundLayer = createBackgroundLayer(level.backgrounds, backgroundSprites);
-  comp.layers.push(backgroundLayer);
+  comp.layers.push(backgroundLayer); //adds background
 
-  const gravity = 0.5;
+  const gravity = 30;
+  mario.pos.set(64, 180);
+  mario.vel.set(200, -600);
 
   const spriteLayer = createSpriteLayer(mario);
   comp.layers.push(spriteLayer);
 
-  function update() {
+  const timer = new Timer(1/60);
+  timer.update = function update(deltaTime) {
     comp.draw(context)
-    mario.update();
-    mario.vel.y += gravity; // adding gravity
-    requestAnimationFrame(update);
+    mario.update(deltaTime)
+    mario.vel.y += gravity;
   }
-  update();
+  timer.start();
 });
