@@ -4,11 +4,13 @@ import {loadLevel} from './Loaders.js';
 import {createMario} from './entities.js';
 import {loadBackgroundSprites} from './sprites.js';
 import {createBackgroundLayer, createSpriteLayer} from './layers.js';
+import Keyboard from './keyboardState.js';
 
-
-window.addEventListener('keydown', event => {
-  console.log(event);
+const input = new Keyboard();
+input.addMapping(32, keyState => {
+  console.log(keyState);
 })
+input.listenTo(window);
 
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
