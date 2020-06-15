@@ -6,12 +6,6 @@ import {loadBackgroundSprites} from './sprites.js';
 import {createBackgroundLayer, createSpriteLayer} from './layers.js';
 import Keyboard from './keyboardState.js';
 
-const input = new Keyboard();
-input.addMapping(32, keyState => {
-  console.log(keyState);
-});
-input.listenTo(window);
-
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
@@ -28,6 +22,13 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
   const gravity = 2000;
   mario.pos.set(64, 180);
   mario.vel.set(200, -600);
+
+  const SPACE = 32; // 32 is spacebar, not downward arrow, my bad
+  const input = new Keyboard();
+    input.addMapping(SPACE, keyState => {
+    console.log(keyState);
+  });
+  input.listenTo(window);
 
   const spriteLayer = createSpriteLayer(mario);
   comp.layers.push(spriteLayer);
