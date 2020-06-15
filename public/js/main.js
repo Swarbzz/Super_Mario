@@ -26,6 +26,11 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
   const SPACE = 32; // 32 is spacebar, not downward arrow, my bad
   const input = new Keyboard();
     input.addMapping(SPACE, keyState => {
+      if (keyState) {
+        mario.jump.start();
+      } else {
+        mario.jump.cancel();
+      }
     console.log(keyState);
   });
   input.listenTo(window);
