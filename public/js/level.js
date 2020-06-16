@@ -5,4 +5,10 @@ export default class Level {
     this.comp = new Compositor();
     this.entities = new Set(); // new set prevents duplication of thing like mario for instance
   }
+
+  update(deltaTime) {
+    this.entities.forEach(enitiy => {
+      enitiy.update(deltaTime);
+    })
+  }
 }

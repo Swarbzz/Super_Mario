@@ -13,7 +13,7 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
 .then(([mario, level]) => {
 
   const gravity = 2000; // change the gravity
-  mario.pos.set(64, 180); // change his position
+  mario.pos.set(64, 64); // change his position
 
   level.entities.add(mario);
 
@@ -31,7 +31,7 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
 
   const timer = new Timer(1/60);
   timer.update = function update(deltaTime) {
-    mario.update(deltaTime)
+    level.update(deltaTime)
     level.comp.draw(context)
     mario.vel.y += gravity * deltaTime;
   }
