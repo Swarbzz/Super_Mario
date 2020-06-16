@@ -1,3 +1,7 @@
+import Level from './level.js';
+import {createBackgroundLayer, createSpriteLayer} from './layers.js';
+import {loadBackgroundSprites} from './sprites.js';
+
 export function loadImage(url) {
   return new Promise(resolve => {
     const image = new Image();
@@ -9,6 +13,21 @@ export function loadImage(url) {
 }
 
 export function loadLevel(name) {
-  return fetch(`./Levels/${name}.json`)
-  .then(r => r.json());
+  return Promise.all([
+    fetch(`./Levels/${name}.json`)
+    .then(r => r.json()),
+    
+    loadBackgroundSprites(),
+  ])
+  .then(([levelSpec, backgroundSprites]) => {
+    const level = new Level();
+
+    const backgroundLayer = createBackgroundLayer(levelSpec.backgrounds, backgroundSprites);
+    level.comp.layers.push(backgroundLayer); //adds background
+
+    const spriteLayer = createSpriteLayer(level.entities);
+    level.comp.layers.push(spriteLayer);
+
+    return level;
+  });
 }
