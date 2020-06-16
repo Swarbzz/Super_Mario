@@ -15,6 +15,8 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
   const gravity = 2000; // change the gravity
   mario.pos.set(64, 180); // change his position
 
+  level.entities.add(mario);
+
   const SPACE = 32; // 32 is spacebar, not downward arrow, my bad
   const input = new Keyboard();
     input.addMapping(SPACE, keyState => {
