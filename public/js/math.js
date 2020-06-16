@@ -1,4 +1,4 @@
-export class Matrix {
+export class Matrix { //adding collision, this sets up a 0 based grid matrix, so the computer knows where the tiles are
   constructor() {
     this.grid =[];
   }
@@ -18,6 +18,8 @@ export class Matrix {
     this.grid[x][y] = value;
   }
 }
+
+window.Matrix = Matrix
 
 export class Vec2 {
     constructor(x, y) {
