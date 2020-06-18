@@ -1,28 +1,4 @@
-class TileResolver {
-  constructor(matrix, tileSize = 16) {
-    this.matrix = matrix;
-    this.tileSize = tileSize;
-  }
-
-  toIndex(pos) {
-    return Math.floor(pos / this.tileSize)
-  }
-
-  getByIndex(indexX, indexY) {
-    const tile = this.matrix.get(indexX, indexY);
-    if (tile) {
-      return {
-        tile, 
-      };
-    }
-  }
-
-  matchByPosition(posX, posY) {
-    return this.getByIndex(
-      this.toIndex(posX),
-      this.toIndex(posY));
-  }
-}
+import TileResolver from './tileResolver.js';
 
 export default class TileCollider {
   constructor(tileMatrix) {
@@ -32,7 +8,7 @@ export default class TileCollider {
   test(entity) {
     const match = this.tiles.matchByPosition(entity.pos.x, entity.pos.y);
     if (match) {
-      console.log('Matched tile', match, match.tile);
+      console.log('Matched tile', match, match.tile); // this displays the tile mario runs into
     }
     //console.log('testing', entity)
   }
