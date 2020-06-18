@@ -2,6 +2,7 @@ import Timer from './timer.js';
 import {loadLevel} from './Loaders.js';
 import {createMario} from './entities.js';
 import Keyboard from './keyboardState.js';
+import {createCollisionLayer} from './layers.js'
 
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
@@ -14,6 +15,8 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
 
   const gravity = 2000; // change the gravity
   mario.pos.set(64, 64); // change his position
+
+  createCollisionLayer(level); 
 
   level.entities.add(mario);
 

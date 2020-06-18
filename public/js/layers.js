@@ -33,3 +33,14 @@ export function createSpriteLayer(entities) {
     });
   }
 }
+
+export function createCollisionLayer(level) {
+  const tileResolver = level.tileCollider.tiles;
+  const tileSize = tileResolver.tileSize;
+
+  const getByIndexOriginal = tileResolver.getByIndex;
+  tileResolver.getByIndex = function getByIndexFake(x, y) {
+    console.log(x, y); // this identifies the tile number in correspondance of the grid in which mario is situatated. 
+    return getByIndexOriginal.call(tileResolver, x, y);
+  }
+} // this function tracks the tiles called from getByIndex in tileResolver
