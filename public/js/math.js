@@ -6,8 +6,8 @@ export class Matrix { //adding collision, this sets up a 0 based grid matrix, so
   forEach(callback) {
 
     this.grid.forEach((column, x) => {
-      column.forEach((tile, y) => {
-        callback(tile, x, y);
+      column.forEach((value, y) => {
+        callback(value, x, y);
       });
     });
   }
