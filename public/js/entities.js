@@ -12,7 +12,7 @@ export function createMario() {
 
     mario.addTrait(new Go());
     mario.addTrait(new Jump()); // jumps needs to be before velocity or mario will fall into the ground
-    mario.addTrait(new Velocity());
+    //mario.addTrait(new Velocity());
 
     mario.draw = function drawMarion(context) {
       sprite.draw('idle', context, this.pos.x, this.pos.y);

@@ -5,7 +5,30 @@ export default class TileCollider {
     this.tiles = new TileResolver(tileMatrix);
   }
 
-  checkY(entity) {
+  checkX(entity) { // checking the X axis collision
+    const matches = this.tiles.searchByRange(
+      entity.pos.x, entity.pos.x + entity.size.x,
+      entity.pos.y, entity.pos.y + entity.size.y
+      );
+      matches.forEach (match => {
+        if (match.tile.name !== 'ground') {
+          return;
+        }
+        if (entity.vel.x > 0) {
+          if (entity.pos.x + entity.size.x > match.x1) { // mario now touches the ground with his feet and not his head
+            entity.pos.x = match.y1 - entity.size.x; // y1 is a number calculated by the TileResolver
+            entity.vel.x = 0; // mario will stop and hit the floor
+          }
+        } else if (entity.vel.x < 0) {
+          if (entity.pos.x < match.x2) {
+            entity.pos.x = match.x2; // y2 is a number calculated by the TileResolver
+            entity.vel.x = 0; // mario will bump his head on the ceiling 
+          }
+        }
+      });
+    }
+
+  checkY(entity) { // checking the y axis collision
     const matches = this.tiles.searchByRange(
       entity.pos.x, entity.pos.x + entity.size.x,
       entity.pos.y, entity.pos.y + entity.size.y
