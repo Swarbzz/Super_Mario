@@ -1,7 +1,7 @@
 import Timer from './timer.js';
 import {loadLevel} from './Loaders.js';
 import {createMario} from './entities.js';
-import Keyboard from './keyboardState.js';
+import {setUpKeyboard} from './input.js';
 import {createCollisionLayer} from './layers.js'
 
 const canvas = document.getElementById('screen');
@@ -22,21 +22,8 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
 
   level.comp.layers.push(createCollisionLayer(level));
 
-  const SPACE = 32; // 32 is spacebar, not downward arrow, my bad
-  const input = new Keyboard();
-    input.addMapping(SPACE, keyState => {
-      if (keyState) {
-        mario.jump.start();
-      } else {
-        mario.jump.cancel();
-      }
-  });
-  input.addMapping(39, keyState => {
-   mario.go.direction = keyState; //going right
-  });
-  input.addMapping(37, keyState => {
-    mario.go.direction = -keyState; //going left
-  });
+  const input = setUpKeyboard(mario);
+
   input.listenTo(window);
 
   ['mousedown', 'mousemove'].forEach(eventName => {
