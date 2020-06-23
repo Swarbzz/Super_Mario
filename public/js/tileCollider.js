@@ -16,7 +16,12 @@ export default class TileCollider {
     if (entity.vel.y > 0) {
       if (entity.pos.y > match.y1) {
         entity.pos.y = match.y1; // y1 is a number calculated by the TileResolver
-        entity.vel.y = 0;
+        entity.vel.y = 0; // mario will stop and hit the floor
+      }
+    } else if (entity.vel.y < 0) {
+      if (entity.pos.y < match.y2) {
+        entity.pos.y = match.y2; // y2 is a number calculated by the TileResolver
+        entity.vel.y = 0; // mario will bump his head on the ceiling 
       }
     }
   }

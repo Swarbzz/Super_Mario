@@ -20,6 +20,8 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
 
   level.entities.add(mario);
 
+  level.comp.layers.push(createCollisionLayer(level));
+
   const SPACE = 32; // 32 is spacebar, not downward arrow, my bad
   const input = new Keyboard();
     input.addMapping(SPACE, keyState => {

@@ -12,6 +12,10 @@ export class Matrix { //adding collision, this sets up a 0 based grid matrix, so
     });
   }
 
+  clear() {
+    this.grid.length = 0;
+  }
+
   get(x, y) {
     const col = this.grid[x];
     if (col) {

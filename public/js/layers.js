@@ -7,6 +7,7 @@
 //     }  
 //   });
 // }
+import {Matrix} from './math.js';
 
 export function createBackgroundLayer(level, sprites) {
   const buffer = document.createElement('canvas');
@@ -35,12 +36,26 @@ export function createSpriteLayer(entities) {
 }
 
 export function createCollisionLayer(level) {
+  const resolvedTiles = [];
+
   const tileResolver = level.tileCollider.tiles;
   const tileSize = tileResolver.tileSize;
 
   const getByIndexOriginal = tileResolver.getByIndex;
   tileResolver.getByIndex = function getByIndexFake(x, y) {
-    console.log(x, y); // this identifies the tile number in correspondance of the grid in which mario is situatated. 
+    resolvedTiles.push({x, y});
+    //console.log(x, y); // this identifies the tile number in correspondance of the grid in which mario is situatated. 
     return getByIndexOriginal.call(tileResolver, x, y);
+  }
+
+  return function drawCollision(context) {
+    context.strokeStyle = 'blue';
+    resolvedTiles.forEach(({x, y}) => {
+      context.beginPath();
+      context.rect(x * tileSize, y * tileSize, tileSize, tileSize); // all tilesize variables will contain 16 
+      context.stroke(); // shows us what tiles we are actually touching with our mouse, good for debugging
+    });
+
+    resolvedTiles.length = 0;
   }
 } // this function tracks the tiles called from getByIndex in tileResolver
