@@ -7,6 +7,17 @@ export default class TileResolver {
   toIndex(pos) {
     return Math.floor(pos / this.tileSize)
   }
+
+  toIndexRange(pos1, pos2) {
+    const pMax = Math.ceil(pos2 / this.tileSize) * this.tileSize;
+    const range = [];
+    let pos = pos1;
+    do {
+      range.push(this.toIndex(pos));
+      pos += this.tileSize;
+    } while (pos < pMax); // this adds up the tile index and returns the number of tiles it has come across but never goes above pMax
+    return range;
+  }
   
   getByIndex(indexX, indexY) {
     const tile = this.matrix.get(indexX, indexY);
@@ -27,4 +38,3 @@ export default class TileResolver {
       this.toIndex(posY));
   }
 }
-  
