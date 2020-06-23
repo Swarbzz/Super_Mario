@@ -1,5 +1,6 @@
 import Entity from './entity.js';
 import Jump from './traits/jump.js';
+import Go from './traits/go.js';
 import Velocity from './traits/Velocity.js';
 import {loadMarioSprite} from './sprites.js';
 
@@ -9,6 +10,7 @@ export function createMario() {
     const mario = new Entity();
     mario.size.set(14, 16);
 
+    mario.addTrait(new Go());
     mario.addTrait(new Jump()); // jumps needs to be before velocity or mario will fall into the ground
     mario.addTrait(new Velocity());
 

@@ -30,7 +30,12 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
       } else {
         mario.jump.cancel();
       }
-    console.log(keyState);
+  });
+  input.addMapping(39, keyState => {
+   mario.go.direction = keyState; //going right
+  });
+  input.addMapping(37, keyState => {
+    mario.go.direction = -keyState; //going left
   });
   input.listenTo(window);
 

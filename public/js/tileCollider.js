@@ -15,7 +15,7 @@ export default class TileCollider {
           return;
         }
         if (entity.vel.y > 0) {
-          if (entity.pos.y + entity.size.y > match.y1) {
+          if (entity.pos.y + entity.size.y > match.y1) { // mario now touches the ground with his feet and not his head
             entity.pos.y = match.y1 - entity.size.y; // y1 is a number calculated by the TileResolver
             entity.vel.y = 0; // mario will stop and hit the floor
           }
