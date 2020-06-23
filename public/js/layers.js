@@ -52,9 +52,20 @@ export function createCollisionLayer(level) {
     context.strokeStyle = 'blue';
     resolvedTiles.forEach(({x, y}) => {
       context.beginPath();
-      context.rect(x * tileSize, y * tileSize, tileSize, tileSize); // all tilesize variables will contain 16 
+      context.rect(
+        x * tileSize, y * tileSize, 
+        tileSize, tileSize); // all tilesize variables will contain 16 
       context.stroke(); // shows us what tiles we are actually touching with our mouse, good for debugging
     });
+
+    context.strokeStyle = 'blue';
+    level.entities.forEach(entity => {
+      context.beginPath();
+      context.rect(
+        entity.pos.x, entity.pos.y, 
+        entity.size.x, entity.size.y);
+      context.stroke();
+    })
 
     resolvedTiles.length = 0;
   }
