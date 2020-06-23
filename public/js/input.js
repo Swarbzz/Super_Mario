@@ -1,19 +1,18 @@
 import Keyboard from './keyboardState.js';
 
 export function setUpKeyboard(entity) {
-const SPACE = 32; // 32 is spacebar, not downward arrow, my bad
   const input = new Keyboard();
-    input.addMapping(SPACE, keyState => {
+    input.addMapping("Space", keyState => {
       if (keyState) {
         entity.jump.start();
       } else {
         entity.jump.cancel();
       }
   });
-  input.addMapping(39, keyState => {
+  input.addMapping("ArrowRight", keyState => {
    entity.go.direction = keyState; //going right
   });
-  input.addMapping(37, keyState => {
+  input.addMapping("ArrowLeft", keyState => {
     entity.go.direction = -keyState; //going left
   });
   return input;
