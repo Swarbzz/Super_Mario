@@ -6,10 +6,19 @@ export default class TileCollider {
   }
 
   checkX(entity) { // checking the X axis collision
+    let x ;
+    if (entity.vel.x > 0) {
+      x = entity.pos.x + entity.size.x;
+    } else if (entity.vel.x < 0) {
+      x = entity.pos.x;
+    } else {
+      return;
+    }
+
     const matches = this.tiles.searchByRange(
-      entity.pos.x, entity.pos.x + entity.size.x,
-      entity.pos.y, entity.pos.y + entity.size.y
-      );
+      x, x, 
+      entity.pos.y, entity.pos.y + entity.size.y);
+      
       matches.forEach (match => {
         if (match.tile.name !== 'ground') {
           return;
@@ -29,10 +38,18 @@ export default class TileCollider {
     }
 
   checkY(entity) { // checking the y axis collision
+    let y ;
+    if (entity.vel.y > 0) {
+      y = entity.pos.y + entity.size.y;
+    } else if (entity.vel.y < 0) {
+      y = entity.pos.y;
+    } else {
+      return;
+    }
     const matches = this.tiles.searchByRange(
       entity.pos.x, entity.pos.x + entity.size.x,
-      entity.pos.y, entity.pos.y + entity.size.y
-      );
+      y, y);
+
       matches.forEach (match => {
         if (match.tile.name !== 'ground') {
           return;

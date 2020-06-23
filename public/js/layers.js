@@ -58,7 +58,7 @@ export function createCollisionLayer(level) {
       context.stroke(); // shows us what tiles we are actually touching with our mouse, good for debugging
     });
 
-    context.strokeStyle = 'blue';
+    context.strokeStyle = 'red';
     level.entities.forEach(entity => {
       context.beginPath();
       context.rect(
