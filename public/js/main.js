@@ -1,4 +1,5 @@
 import Timer from './timer.js';
+import Camera from './camera.js';
 import {loadLevel} from './Loaders.js';
 import {createMario} from './entities.js';
 import {setUpKeyboard} from './input.js';
@@ -13,6 +14,8 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
 ])
 .then(([mario, level]) => {
   mario.pos.set(64, 64); // change his position
+
+  const camera = new Camera();
 
   createCollisionLayer(level); 
 
@@ -37,7 +40,7 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
   const timer = new Timer(1/60);
   timer.update = function update(deltaTime) {
     level.update(deltaTime)
-    level.comp.draw(context)
+    level.comp.draw(context, camera)
   }
   timer.start();
 });
