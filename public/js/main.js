@@ -16,6 +16,7 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
   mario.pos.set(64, 64); // change his position
 
   const camera = new Camera();
+  window.camera = camera;
 
   createCollisionLayer(level); 
 

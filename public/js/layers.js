@@ -21,8 +21,8 @@ export function createBackgroundLayer(level, sprites) {
   });
   
   
-  return function drawBackgroundLayer(context) {
-    context.drawImage(buffer, 0, 0);
+  return function drawBackgroundLayer(context, camera) {
+    context.drawImage(buffer, -camera.pos.x, -camera.pos.y);
   };
 }
 
