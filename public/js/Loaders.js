@@ -14,9 +14,11 @@ export function loadImage(url) {
 
 function createTiles(level, backgrounds) {
   backgrounds.forEach(background => {
-    background.ranges.forEach(([x1, x2, y1, y2]) => {
-      for (let x = x1; x < x2; ++x) { //width of the sky
-        for (let y = y1; y < y2; ++ y) { // length of the sky
+    background.ranges.forEach(([xStart, xLen, yStart, yLen]) => {
+      const xEnd = xStart + xLen; // allows the json file to have to the length of blocks rather than the position, so i can set the start of the block to only be 2 blocks long, see json file for reference
+      const yEnd = yStart + yLen;
+      for (let x = xStart; x < xEnd; ++x) { //width of the sky -- old comment but want to keep it for reference
+        for (let y = yStart; y < yEnd; ++ y) { // length of the sky -- old comment but want to keep it for reference
           level.tiles.set(x, y, {
             name: background.tile, //this talks to the level.json file to get the name of the tile
           });
