@@ -28,16 +28,6 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
 
   input.listenTo(window);
 
-  // DEBUGGING CODE!!
-  // ['mousedown', 'mousemove'].forEach(eventName => { 
-  //   canvas.addEventListener(eventName, event => {
-  //     if (event.buttons === 1) {
-  //       mario.vel.set(0, 0);
-  //       mario.pos.set(event.offsetX, event.offsetY); // this allows me to move mario with a click and drag off my mouse
-  //     }
-  //   })
-  // })
-
   const timer = new Timer(1/60);
   timer.update = function update(deltaTime) {
     level.update(deltaTime)

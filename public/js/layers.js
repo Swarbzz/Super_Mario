@@ -60,12 +60,13 @@ export function createCollisionLayer(level) {
     return getByIndexOriginal.call(tileResolver, x, y);
   }
 
-  return function drawCollision(context) {
+  return function drawCollision(context, camera) {
     context.strokeStyle = 'blue';
     resolvedTiles.forEach(({x, y}) => {
       context.beginPath();
       context.rect(
-        x * tileSize, y * tileSize, 
+        x * tileSize - camera.pos.x,
+        y * tileSize - camera.pos.y,
         tileSize, tileSize); // all tilesize variables will contain 16 
       context.stroke(); // shows us what tiles we are actually touching with our mouse, good for debugging
     });
@@ -74,8 +75,10 @@ export function createCollisionLayer(level) {
     level.entities.forEach(entity => {
       context.beginPath();
       context.rect(
-        entity.pos.x, entity.pos.y, 
-        entity.size.x, entity.size.y);
+        entity.pos.x - camera.pos.x, 
+        entity.pos.y - camera.pos.y, 
+        entity.size.x, 
+        entity.size.y);
       context.stroke();
     })
 
