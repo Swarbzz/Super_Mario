@@ -1,7 +1,6 @@
 import Entity from './entity.js';
 import Jump from './traits/jump.js';
 import Go from './traits/go.js';
-import Velocity from './traits/Velocity.js';
 import {loadMarioSprite} from './sprites.js';
 
 export function createMario() {

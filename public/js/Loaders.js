@@ -13,17 +13,27 @@ export function loadImage(url) {
 }
 
 function createTiles(level, backgrounds) {
+  function applyRange(background, xStart, xLen, yStart, yLen) {
+    const xEnd = xStart + xLen; // allows the json file to have to the length of blocks rather than the position, so i can set the start of the block to only be 2 blocks long, see json file for reference
+    const yEnd = yStart + yLen;
+    for (let x = xStart; x < xEnd; ++x) { //width of the sky -- old comment but want to keep it for reference
+      for (let y = yStart; y < yEnd; ++ y) { // length of the sky -- old comment but want to keep it for reference
+        level.tiles.set(x, y, {
+          name: background.tile, //this talks to the level.json file to get the name of the tile
+        });
+      }
+    }
+  }
+
   backgrounds.forEach(background => {
-    background.ranges.forEach(([xStart, xLen, yStart, yLen]) => {
-      const xEnd = xStart + xLen; // allows the json file to have to the length of blocks rather than the position, so i can set the start of the block to only be 2 blocks long, see json file for reference
-      const yEnd = yStart + yLen;
-      for (let x = xStart; x < xEnd; ++x) { //width of the sky -- old comment but want to keep it for reference
-        for (let y = yStart; y < yEnd; ++ y) { // length of the sky -- old comment but want to keep it for reference
-          level.tiles.set(x, y, {
-            name: background.tile, //this talks to the level.json file to get the name of the tile
-          });
-        }
-      }  
+    background.ranges.forEach(range => {
+      if (range.length === 4) {
+        const [xStart, xLen, yStart, yLen] = range;
+        applyRange(background, xStart, xLen, yStart, yLen);
+      } else if (range.length === 2) {
+        const [xStart, yStart] = range;
+        applyRange(background, xStart, 1, yStart, 1); // this function allows me to change the json so i do not have to put the length of a tile as 1 if applicable.
+      }
     });
   });
 }
