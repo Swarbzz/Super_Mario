@@ -12,6 +12,11 @@ export function loadImage(url) {
   });
 }
 
+function loadJSON(url) {
+  return fetch(url)
+  .then(r => r.json());
+}
+
 function createTiles(level, backgrounds) {
   function applyRange(background, xStart, xLen, yStart, yLen) {
     const xEnd = xStart + xLen; // allows the json file to have to the length of blocks rather than the position, so i can set the start of the block to only be 2 blocks long, see json file for reference
@@ -45,8 +50,7 @@ function createTiles(level, backgrounds) {
 
 export function loadLevel(name) {
   return Promise.all([
-    fetch(`./Levels/${name}.json`)
-    .then(r => r.json()),
+    loadJSON(`./Levels/${name}.json`),
     loadBackgroundSprites(),
   ])
   .then(([levelSpec, backgroundSprites]) => {
