@@ -1,4 +1,6 @@
 {
+  "spriteSheet": "underworld",
+
   "backgrounds": [
     {
       "tile": "sky",

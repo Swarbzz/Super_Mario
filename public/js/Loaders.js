@@ -64,10 +64,10 @@ function loadSpriteSheet(name) { // function to get the current json file
 }
 
 export function loadLevel(name) {
-  return Promise.all([
-    loadJSON(`./Levels/${name}.json`),
-    loadSpriteSheet('overworld'), // loading the overworld.json file
-  ])
+  return loadJSON(`./Levels/${name}.json`)
+  .then(levelSpec => Promise.all([
+    levelSpec, loadSpriteSheet(levelSpec.spriteSheet),
+  ]))
   .then(([levelSpec, backgroundSprites]) => {
     const level = new Level();
 
