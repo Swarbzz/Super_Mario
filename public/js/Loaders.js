@@ -1,6 +1,5 @@
 import Level from './level.js';
 import {createBackgroundLayer, createSpriteLayer} from './layers.js';
-import {loadBackgroundSprites} from './sprites.js';
 import SpriteSheet from './SpriteSheet.js';
 
 export function loadImage(url) {
