@@ -23,6 +23,7 @@
     },
         {
           "tile": "sky",
+          "type": "ground",
           "ranges": [
             [
               20, 2,

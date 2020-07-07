@@ -25,6 +25,7 @@ function createTiles(level, backgrounds) {
       for (let y = yStart; y < yEnd; ++ y) { // length of the sky -- old comment but want to keep it for reference
         level.tiles.set(x, y, {
           name: background.tile, //this talks to the level.json file to get the name of the tile
+          type: background.type,
         });
       }
     }
