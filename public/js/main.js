@@ -3,7 +3,7 @@ import Camera from './camera.js';
 import {loadLevel} from './Loaders.js';
 import {createMario} from './entities.js';
 import {setUpKeyboard} from './input.js';
-import {createCollisionLayer} from './layers.js'
+import {createCollisionLayer, createCameraLayer} from './layers.js'
 import {setupMouseControl} from './debug.js';
 
 const canvas = document.getElementById('screen');
@@ -23,7 +23,8 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
 
   level.entities.add(mario);
 
-  level.comp.layers.push(createCollisionLayer(level));
+  level.comp.layers.push(createCollisionLayer(level),
+  createCameraLayer(camera));
 
   const input = setUpKeyboard(mario);
 
