@@ -67,6 +67,7 @@ export function loadSpriteSheet(name) { // function to get the current json file
     if (sheetSpec.frames) {
       sheetSpec.frames.forEach(frameSpec => {
         sprites.define(frameSpec.name, ...frameSpec.rect); // the three dots allows an expression to be expanded in places where multiple arguments are expected
+                                                            // i.e. it will load the all the coordinates for mario labled in the "rect" mario.json
       });
     }
       return sprites;

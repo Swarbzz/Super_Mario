@@ -6,8 +6,6 @@ import {loadSpriteSheet} from './Loaders.js';
 export function createMario() {
   return loadSpriteSheet('mario')
   .then(sprite => {
-    console.log(sprite);
-    
     const mario = new Entity();
     mario.size.set(14, 14);
 
