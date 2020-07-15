@@ -49,7 +49,7 @@ function createTiles(level, backgrounds) {
   });
 }
 
-function loadSpriteSheet(name) { // function to get the current json file
+export function loadSpriteSheet(name) { // function to get the current json file
   return loadJSON(`/sprites/${name}.json`)
   .then(sheetSpec => Promise.all([
     sheetSpec,
@@ -57,9 +57,18 @@ function loadSpriteSheet(name) { // function to get the current json file
   ]))
   .then(([sheetSpec, image]) => {
       const sprites = new SpriteSheet(image, sheetSpec.tileW, sheetSpec.tileH);
+
+    if (sheetSpec.tiles) {
       sheetSpec.tiles.forEach(tileSpec => {
         sprites.defineTile(tileSpec.name, tileSpec.index[0], tileSpec.index[1]); // selects the appropriate tiles
       });
+    }
+
+    if (sheetSpec.frames) {
+      sheetSpec.frames.forEach(frameSpec => {
+        sprites.define(frameSpec.name, ...frameSpec.rect); // the three dots allows an expression to be expanded in places where multiple arguments are expected
+      });
+    }
       return sprites;
     });
 }
