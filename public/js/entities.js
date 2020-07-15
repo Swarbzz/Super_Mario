@@ -2,14 +2,7 @@ import Entity from './entity.js';
 import Jump from './traits/jump.js';
 import Go from './traits/go.js';
 import {loadSpriteSheet} from './Loaders.js';
-
-function createAnim(frames, frameLen) { 
-  return function resolvesFrame(distance) {
-    const frameIndex = Math.floor(distance / frameLen) % frames.length; // frames[frameIndex] will display run-1 to run-3
-    const frameName = frames[frameIndex]
-    return frameName;
-  }
-}
+import {createAnim} from './anim.js'
 
 export function createMario() {
   return loadSpriteSheet('mario')
