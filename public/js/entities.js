@@ -23,7 +23,7 @@ export function createMario() {
     }
 
     mario.draw = function drawMarion(context) {
-      sprite.draw(routeFrame(this), context, 0, 0);
+      sprite.draw(routeFrame(this), context, 0, 0, this.go.direction < 0); // this.go.direction defines when to flip the mario tiles
     }
     return mario;
   });
