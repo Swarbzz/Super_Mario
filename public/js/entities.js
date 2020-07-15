@@ -16,7 +16,9 @@ export function createMario() {
 
     function routeFrame(mario) {
       if (mario.go.direction !== 0) {
-        return "run-1"
+        const frameIndex = Math.floor(mario.go.distance / 10) % frames.length; // frames[frameIndex] will display run-1 to run-3
+        const frameName = frames[frameIndex]
+        return frameName;
       }
       return 'idle';
     }

@@ -11,7 +11,12 @@ export default class Go extends Trait {
     
   update(entity, deltaTime) {
       entity.vel.x = this.speed * this.direction * deltaTime;
-      this.distance += entity.vel.x * deltaTime;
+
+      if (this.direction) {
+      this.distance += Math.abs(entity.vel.x) * deltaTime;
+      } else {
+        this.distance = 0;
+      }
   }
 }
   
