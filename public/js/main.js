@@ -23,8 +23,8 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
 
   level.entities.add(mario);
 
-  level.comp.layers.push(createCollisionLayer(level),
-  createCameraLayer(camera));
+  /* level.comp.layers.push(createCollisionLayer(level),
+  createCameraLayer(camera)); */ // debugging
 
   const input = setUpKeyboard(mario);
 
