@@ -3,6 +3,14 @@ import Jump from './traits/jump.js';
 import Go from './traits/go.js';
 import {loadSpriteSheet} from './Loaders.js';
 
+function createAnim(frames, frameLen) { 
+  return function resolvesFrame(distance) {
+    const frameIndex = Math.floor(distance / frameLen) % frames.length; // frames[frameIndex] will display run-1 to run-3
+    const frameName = frames[frameIndex]
+    return frameName;
+  }
+}
+
 export function createMario() {
   return loadSpriteSheet('mario')
   .then(sprite => {
@@ -12,13 +20,11 @@ export function createMario() {
     mario.addTrait(new Go());
     mario.addTrait(new Jump()); // jumps needs to be before velocity or mario will fall into the ground
 
-    const frames = ['run-1', 'run-2', 'run-3'];
+    const runAnim = createAnim(['run-1', 'run-2', 'run-3'], 10);
 
-    function routeFrame(mario) {
+    function routeFrame(mario) { 
       if (mario.go.direction !== 0) {
-        const frameIndex = Math.floor(mario.go.distance / 10) % frames.length; // frames[frameIndex] will display run-1 to run-3
-        const frameName = frames[frameIndex]
-        return frameName;
+        return runAnim(mario.go.distance); // mario running animation!
       }
       return 'idle';
     }
