@@ -7,13 +7,15 @@ export default class Go extends Trait {
     this.speed = 7000; 
 
     this.distance = 0;
+    this.heading = 1; //where mario is facing
   }
     
   update(entity, deltaTime) {
       entity.vel.x = this.speed * this.direction * deltaTime;
 
       if (this.direction) {
-      this.distance += Math.abs(entity.vel.x) * deltaTime;
+        this.heading = this.direction;
+        this.distance += Math.abs(entity.vel.x) * deltaTime;
       } else {
         this.distance = 0;
       }
