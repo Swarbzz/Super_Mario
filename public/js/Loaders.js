@@ -72,12 +72,14 @@ export function loadSpriteSheet(name) { // function to get the current json file
                                                             // i.e. it will load the all the coordinates for mario labled in the "rect" mario.json
       });
     }
-    // if (sheetSpec.animations) {
-    //   sheetSpec.animations.forEach(animSpec => {
-    //     const animation = createAnim(animSpec.frames, animSpec.frameLen);
-    //     sprites.defineAnim(animSpec.name, animation);
-    //   });
-    // }
+    if (sheetSpec.animations) {
+      sheetSpec.animations.forEach(animSpec => {
+        const animation = createAnim(animSpec.frames, animSpec.frameLen);
+        sprites.defineAnim(animSpec.name, animation);
+      });
+    }
+
+    console.log(sprites)
       return sprites;
     });
 }

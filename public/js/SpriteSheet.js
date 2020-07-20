@@ -4,12 +4,12 @@ export default class SpriteSheet {
     this.width = width;
     this.height = height;
     this.tiles = new Map();
-    // this.animations = new Map();
+    this.animations = new Map();
   }
 
-  // defineAnim(name, animation) {
-  //   this.animations.set(name, animation);
-  // }
+  defineAnim(name, animation) {
+    this.animations.set(name, animation);
+  }
   
   define(name, x, y, width, height) {
 
