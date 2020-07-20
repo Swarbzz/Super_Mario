@@ -1,6 +1,6 @@
 import Level from './level.js';
-import {createBackgroundLayer, createSpriteLayer} from './layers.js';
 import SpriteSheet from './SpriteSheet.js';
+import {createBackgroundLayer, createSpriteLayer} from './layers.js';
 import {createAnim} from './anim.js';
 
 export function loadImage(url) {
@@ -19,6 +19,7 @@ function loadJSON(url) {
 }
 
 function createTiles(level, backgrounds) {
+
   function applyRange(background, xStart, xLen, yStart, yLen) {
     const xEnd = xStart + xLen; // allows the json file to have to the length of blocks rather than the position, so i can set the start of the block to only be 2 blocks long, see json file for reference
     const yEnd = yStart + yLen;
@@ -71,12 +72,12 @@ export function loadSpriteSheet(name) { // function to get the current json file
                                                             // i.e. it will load the all the coordinates for mario labled in the "rect" mario.json
       });
     }
-    if (sheetSpec.animations) {
-      sheetSpec.animations.forEach(animSpec => {
-        const animation = createAnim(animSpec.frames, animSpec.frameLen);
-        sprites.defineAnim(animSpec.name, animation);
-      });
-    }
+    // if (sheetSpec.animations) {
+    //   sheetSpec.animations.forEach(animSpec => {
+    //     const animation = createAnim(animSpec.frames, animSpec.frameLen);
+    //     sprites.defineAnim(animSpec.name, animation);
+    //   });
+    // }
       return sprites;
     });
 }

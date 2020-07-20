@@ -4,12 +4,12 @@ export default class SpriteSheet {
     this.width = width;
     this.height = height;
     this.tiles = new Map();
-    this.animations = new Map();
+    // this.animations = new Map();
   }
 
-  defineAnim(name, animation) {
-    this.animations.set(name, animation);
-  }
+  // defineAnim(name, animation) {
+  //   this.animations.set(name, animation);
+  // }
   
   define(name, x, y, width, height) {
 
@@ -42,17 +42,21 @@ export default class SpriteSheet {
 
     this.tiles.set(name, buffers);
   }
+
   defineTile(name, x, y) {
     this.define(name, x * this.width, y * this.height, this.width, this.height)
   }
+
   draw(name, context, x, y, flip = false) {
     const buffer = this.tiles.get(name)[flip ? 1 : 0]; // flips the mario tiles depending on direction look at entities.js
     context.drawImage(buffer, x, y); //drawImage is polymorphic, able to take many arguments to get different results.
   }
+
   drawAnim(name, context, x, y, distance) {
     const animation = this.animations.get(name);
     this.drawTile(animation(distance), context, x, y);
   }
+
   drawTile(name, context, x, y) {
     this.draw(name, context, x* this.width, y * this.height); //multipled by 16 because the draw function doesn't include tile sizes
   }
