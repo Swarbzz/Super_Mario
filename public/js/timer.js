@@ -5,6 +5,10 @@ export default class Timer {
 
     this.updateProxy = (time) => {
       accumulatedTime += (time - lastTime) / 1000; //decoupled the internal framerate of the game from the rendering framerate 
+
+      if (accumulatedTime > 1) {
+        accumulatedTime = 1;
+      }
   
       while (accumulatedTime > deltaTime) {
         this.update(deltaTime);
