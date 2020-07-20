@@ -1,6 +1,7 @@
 import Level from './level.js';
 import {createBackgroundLayer, createSpriteLayer} from './layers.js';
 import SpriteSheet from './SpriteSheet.js';
+import {createAnim} from './anim.js';
 
 export function loadImage(url) {
   return new Promise(resolve => {
@@ -68,6 +69,12 @@ export function loadSpriteSheet(name) { // function to get the current json file
       sheetSpec.frames.forEach(frameSpec => {
         sprites.define(frameSpec.name, ...frameSpec.rect); // the three dots allows an expression to be expanded in places where multiple arguments are expected
                                                             // i.e. it will load the all the coordinates for mario labled in the "rect" mario.json
+      });
+    }
+    if (sheetSpec.animations) {
+      sheetSpec.animations.forEach(animSpec => {
+        const animation = createAnim(animSpec.frames, animSpec.frameLen);
+        sprites.defineAnim(animSpec.name, animation);
       });
     }
       return sprites;
