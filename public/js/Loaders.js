@@ -78,8 +78,6 @@ export function loadSpriteSheet(name) { // function to get the current json file
         sprites.defineAnim(animSpec.name, animation);
       });
     }
-
-    console.log(sprites)
       return sprites;
     });
 }
