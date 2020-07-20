@@ -27,7 +27,7 @@ export function createBackgroundLayer(level, sprites) {
       const col = tiles.grid[x];
       if (col) {
         col.forEach((tile, y) => {
-          if (tile.name === 'chance') {
+          if (sprites.animations,has(tile.name)) {
             sprites.drawAnim(tile.name, context, x - startIndex, y, level.totalTime);
           } else {
           sprites.drawTile(tile.name, context, x - startIndex, y);
