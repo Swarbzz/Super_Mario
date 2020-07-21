@@ -14,20 +14,19 @@ Promise.all([ //allows sprites and level to load at the same time instead of one
   loadLevel('1-1'),
 ])
 .then(([mario, level]) => {
-  mario.pos.set(64, 64); // change his position
-
   const camera = new Camera();
   window.camera = camera;
 
-  createCollisionLayer(level); 
+  mario.pos.set(64, 64); // change his position
 
   level.entities.add(mario);
+
+  // createCollisionLayer(level); 
 
   /* level.comp.layers.push(createCollisionLayer(level),
   createCameraLayer(camera)); */ // debugging
 
   const input = setUpKeyboard(mario);
-
   input.listenTo(window);
 
   setupMouseControl(canvas, mario, camera);

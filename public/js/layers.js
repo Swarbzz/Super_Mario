@@ -27,11 +27,11 @@ export function createBackgroundLayer(level, sprites) {
       const col = tiles.grid[x];
       if (col) {
         col.forEach((tile, y) => {
-          if (tile.name === 'chance') {
-            sprites.drawAnim(tile.name, context, x - startIndex, y, 1);
-          } else {
+          // if (tile.name === 'chance') {
+          //   sprites.drawAnim(tile.name, context, x - startIndex, y, 1);
+          // } else {
             sprites.drawTile(tile.name, context, x - startIndex, y);
-          }
+          // }
         });
       }
     }
