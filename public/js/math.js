@@ -32,8 +32,6 @@ export class Matrix { //adding collision, this sets up a 0 based grid matrix, so
   }
 }
 
-window.Matrix = Matrix
-
 export class Vec2 {
     constructor(x, y) {
       this.set(x, y)

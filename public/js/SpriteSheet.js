@@ -1,5 +1,5 @@
 export default class SpriteSheet {
-  constructor(image, width, height){
+  constructor(image, width, height) {
     this.image = image;
     this.width = width;
     this.height = height;
@@ -22,8 +22,8 @@ export default class SpriteSheet {
       const context = buffer.getContext('2d');
   
       if (flip) {
-      context.scale(-1, 1); // mirror tiles
-      context.translate(-width, 0)
+        context.scale(-1, 1); // mirror tiles
+        context.translate(-width, 0)
       }
 
       context.drawImage(
@@ -32,7 +32,8 @@ export default class SpriteSheet {
         y,
         width,
         height,
-        0, 0,
+        0, 
+        0,
         width,
         height);
 
@@ -48,7 +49,7 @@ export default class SpriteSheet {
   }
 
   draw(name, context, x, y, flip = false) {
-    const buffer = this.tiles.get(name)[flip ? 1 : 0]; // flips the mario tiles depending on direction look at entities.js
+    const buffer = this.tiles.get(name)[flip ? 1 : 0] // flips the mario tiles depending on direction look at entities.js
     context.drawImage(buffer, x, y); //drawImage is polymorphic, able to take many arguments to get different results.
   }
 
