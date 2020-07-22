@@ -10,10 +10,10 @@ export function setUpKeyboard(entity) {
       }
   });
   input.addMapping("ArrowRight", keyState => {
-   entity.go.direction = keyState; //going right
+   entity.go.direction += keyState ? 1 : -1; //going right
   });
   input.addMapping("ArrowLeft", keyState => {
-    entity.go.direction = -keyState; //going left
+    entity.go.direction += -keyState ? -1 : 1; //going left
   });
   return input;
 }
