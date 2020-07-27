@@ -54,5 +54,4 @@ export default class TileResolver {
     });
     return matches;
   }
-
 }
