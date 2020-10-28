@@ -24,6 +24,8 @@ export default class Jump extends Trait {
     obstruct(entity, side) {
         if(side === 'bottom') {
             this.ready = true; // This means mario can't double, triple, infinitly jump
+        } else if (side === 'top') {
+            this.cancel();
         }
     }
 
