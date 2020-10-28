@@ -6,6 +6,7 @@ export default class Go extends Trait {
 
         this.dir = 0;
         this.acceleration = 400;
+        this.deceleration = 300;
         this.dragFactor = 1/5000; // so Mario doesn't go at light speed
 
 
@@ -14,16 +15,20 @@ export default class Go extends Trait {
     }
 
     update(entity, deltaTime) {
+        const absX = Math.abs(entity.vel.x)
 
         if (this.dir) {
             entity.vel.x += this.acceleration * this.dir * deltaTime;
             this.heading = this.dir;
-            this.distance += Math.abs(entity.vel.x) * deltaTime;
+            this.distance += absX * deltaTime;
+        } else if (entity.vel.x !== 0) {
+            const decel = Math.min(absX, this.deceleration * deltaTime)
+            entity.vel.x += entity.vel.x > 0 ? -decel : decel; // stops Mario from sliding across the floor after running
         } else {
             this.distance = 0;
         }
 
-        const drag = this.dragFactor * entity.vel.x * Math.abs(entity.vel.x);
+        const drag = this.dragFactor * entity.vel.x * absX;
         entity.vel.x -= drag;
     }
 }
