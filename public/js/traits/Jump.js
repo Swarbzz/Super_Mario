@@ -1,4 +1,4 @@
-import {Trait} from '../Entity.js';
+import {Sides, Trait} from '../Entity.js';
 
 export default class Jump extends Trait {
     constructor() {
@@ -9,6 +9,10 @@ export default class Jump extends Trait {
         this.engageTime = 0;
 
         this.velocity = 200;
+    }
+
+    get falling() {
+        return this.ready < 0;
     }
 
     start() {
@@ -22,9 +26,9 @@ export default class Jump extends Trait {
     }
 
     obstruct(entity, side) {
-        if(side === 'bottom') {
+        if(side === Sides.BOTTOM) {
             this.ready = 1; // This means mario can't double, triple, infinitly jump
-        } else if (side === 'top') {
+        } else if (side === Sides.TOP) {
             this.cancel();
         }
     }
