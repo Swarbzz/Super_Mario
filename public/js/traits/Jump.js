@@ -4,7 +4,7 @@ export default class Jump extends Trait {
     constructor() {
         super('jump');
 
-        this.ready = false;
+        this.ready = 0;
         this.duration = 0.5;
         this.engageTime = 0;
 
@@ -12,7 +12,7 @@ export default class Jump extends Trait {
     }
 
     start() {
-        if (this.ready) {
+        if (this.ready > 0) {
             this.engageTime = this.duration;
         }
     }
@@ -23,7 +23,7 @@ export default class Jump extends Trait {
 
     obstruct(entity, side) {
         if(side === 'bottom') {
-            this.ready = true; // This means mario can't double, triple, infinitly jump
+            this.ready = 1; // This means mario can't double, triple, infinitly jump
         } else if (side === 'top') {
             this.cancel();
         }
@@ -37,6 +37,6 @@ export default class Jump extends Trait {
             this.engageTime -= deltaTime;
         }
 
-        this.ready = false;
+        this.ready--;
     }
 }
