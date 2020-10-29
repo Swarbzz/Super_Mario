@@ -11,5 +11,6 @@ Open local host 5000 in your web browser
 A - Left
 D - Right
 P - Jump
+O - Sprint
 
 Enjoy!
