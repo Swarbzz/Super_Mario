@@ -18,17 +18,22 @@ function loadJSON(url) {
     .then(r => r.json());
 }
 
-function createTiles(level, backgrounds, patterns) {
+function createTiles(level, backgrounds, patterns, offsetX = 0, offsetY = 0) {
 
     function applyRange(background, xStart, xLen, yStart, yLen) {
         const xEnd = xStart + xLen;
         const yEnd = yStart + yLen;
         for (let x = xStart; x < xEnd; ++x) {
             for (let y = yStart; y < yEnd; ++y) {
+                const derivedX = x + offsetX;
+                const derivedY = y + offsetY;
+
                 if (background.patterns) {
                     console.log('Pattern detected', patterns[background.patterns]);
+                    const backgrounds = patterns[background.patterns].backgrounds;
+                    createTiles(level, backgrounds, patterns, derivedX, derivedY);
                 } else {
-                    level.tiles.set(x, y, {
+                    level.tiles.set(derivedX, derivedY, {
                         name: background.tile,
                         type: background.type,
                     });
