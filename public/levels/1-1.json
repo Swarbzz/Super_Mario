@@ -208,17 +208,29 @@
                     ]
                 },
                 {
+                    "patterns": "pipe-vert",
+                    "ranges": [
+                        [0, 1],
+                        [0, 2],
+                        [0, 3]
+                    ]
+                }
+            ]
+        },
+        "pipe-vert": {
+            "backgrounds": [
+                {
                     "tile": "pipe-vert-left",
                     "type": "ground",
                     "ranges": [
-                        [0, 1]
+                        [0, 0]
                     ]
                 },
                 {
                     "tile": "pipe-vert-right",
                     "type": "ground",
                     "ranges": [
-                        [1, 1]
+                        [1, 0]
                     ]
                 }
             ]
