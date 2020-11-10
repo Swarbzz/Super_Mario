@@ -23,7 +23,7 @@ export function loadLevel(name) {
     });
 }
 
-function* expandSpan(xStart, xLen, yStart, yLen) {
+function* expandSpan(xStart, xLen, yStart, yLen) { // * makes it a generator function
     const xEnd = xStart + xLen;
     const yEnd = yStart + yLen;
     for (let x = xStart; x < xEnd; ++x) {
@@ -47,28 +47,31 @@ function expandRange(range) {
     }
 }
 
+function* expandRanges(ranges) {
+    for (const range of ranges) {
+        for(const item of expandRange(range)) {
+            yield item;
+        }
+    }
+}
+
 function createTiles(level, tiles, patterns, offsetX = 0, offsetY = 0) {
 
-    function applyRange(tile, xStart, xLen, yStart, yLen) {
-    }
-
     tiles.forEach(tile => {
-        tile.ranges.forEach(range => {
-            for (const {x, y} of expandRange(range)) {
-                const derivedX = x + offsetX;
-                const derivedY = y + offsetY;
+        for (const {x, y} of expandRanges(tile.ranges)) {
+            const derivedX = x + offsetX;
+            const derivedY = y + offsetY;
     
-                if (tile.pattern) {
-                    console.log('Pattern detected', patterns[tile.pattern]);
-                    const tiles = patterns[tile.pattern].tiles;
-                    createTiles(level, tiles, patterns, derivedX, derivedY);
-                } else {
-                    level.tiles.set(derivedX, derivedY, {
-                        name: tile.name,
-                        type: tile.type,
-                    });
-                }
+            if (tile.pattern) {
+                console.log('Pattern detected', patterns[tile.pattern]);
+                const tiles = patterns[tile.pattern].tiles;
+                createTiles(level, tiles, patterns, derivedX, derivedY);
+            } else {
+                level.tiles.set(derivedX, derivedY, {
+                    name: tile.name,
+                    type: tile.type,
+                });
             }
-        });
+        }
     });
 }
