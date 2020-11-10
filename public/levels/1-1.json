@@ -1,9 +1,9 @@
 {
     "spriteSheet": "overworld",
 
-    "backgrounds": [
+    "tiles": [
         {
-            "tile": "sky",
+            "name": "sky",
             "ranges": [
                 [
                     0, 212,
@@ -12,7 +12,7 @@
             ]
         },
         {
-            "tile": "ground",
+            "name": "ground",
             "type": "ground",
             "ranges": [
                 [
@@ -22,7 +22,7 @@
             ]
         },
         {
-            "tile": "sky",
+            "name": "sky",
             "ranges": [
                 [
                     75, 2,
@@ -39,7 +39,7 @@
             ]
         },
         {
-            "tile": "ground",
+            "name": "ground",
             "type": "ground",
             "ranges": [
                 [
@@ -76,7 +76,7 @@
             ]
         },
         {
-            "tile": "bricks",
+            "name": "bricks",
             "type": "ground",
             "ranges": [
                 [
@@ -124,7 +124,7 @@
             ]
         },
         {
-            "tile": "chance",
+            "name": "chance",
             "type": "ground",
             "ranges": [
                 [2, 2],
@@ -148,7 +148,7 @@
             ]
         },
         {
-            "tile": "chocolate",
+            "name": "chocolate",
             "type": "ground",
             "ranges": [
                 [141, 1, 9],
@@ -183,7 +183,7 @@
         },
 
         {
-            "patterns": "pipe-2h",
+           "pattern": "pipe-2h",
             "ranges": [
                 [35, 11],
                 [167, 11],
@@ -191,21 +191,22 @@
             ]
         },
         {
-            "patterns": "pipe-3h",
+           "pattern": "pipe-3h",
             "ranges": [
                 [45, 10]
             ]
         },
         {
-            "patterns": "pipe-4h",
+           "pattern": "pipe-4h",
             "ranges": [
                 [53, 9],
                 [64, 9]
             ]
         },
         {
-            "patterns": "cloud-single",
+           "pattern": "cloud-single",
             "ranges": [
+                [2, 2],
                 [25 ,2],
                 [35, 3],
                 [44, 2],
@@ -221,47 +222,47 @@
         }
     ],
 
-    "patterns": {
+   "pattern": {
         "cloud-single": {
-            "backgrounds": [
+            "tiles": [
                 {
-                    "tile": "cloud-1-1",
+                    "name": "cloud-1-1",
                     "ranges": [[0, 0]]
                 },
                 {
-                    "tile": "cloud-1-2",
+                    "name": "cloud-1-2",
                     "ranges": [[1, 0]]
                 },
                 {
-                    "tile": "cloud-1-3",
+                    "name": "cloud-1-3",
                     "ranges": [[2, 0]]
                 },
                 {
-                    "tile": "cloud-2-1",
+                    "name": "cloud-2-1",
                     "ranges": [[0, 1]]
                 },
                 {
-                    "tile": "cloud-2-2",
+                    "name": "cloud-2-2",
                     "ranges": [[1, 1]]
                 },
                 {
-                    "tile": "cloud-2-3",
+                    "name": "cloud-2-3",
                     "ranges": [[2, 1]]
                 }
             ]
         },
 
         "pipe-section-vert": {
-            "backgrounds": [
+            "tiles": [
                 {
-                    "tile": "pipe-vert-left",
+                    "name": "pipe-vert-left",
                     "type": "ground",
                     "ranges": [
                         [0, 0]
                     ]
                 },
                 {
-                    "tile": "pipe-vert-right",
+                    "name": "pipe-vert-right",
                     "type": "ground",
                     "ranges": [
                         [1, 0]
@@ -271,16 +272,16 @@
         },
 
         "pipe-cap-vert": {
-            "backgrounds": [
+            "tiles": [
                 {
-                    "tile": "pipe-insert-vert-left",
+                    "name": "pipe-insert-vert-left",
                     "type": "ground",
                     "ranges": [
                         [0, 0]
                     ]
                 },
                 {
-                    "tile": "pipe-insert-vert-left",
+                    "name": "pipe-insert-vert-left",
                     "type": "ground",
                     "ranges": [
                         [1, 0]
@@ -290,15 +291,15 @@
         },
 
         "pipe-2h": {
-            "backgrounds": [
+            "tiles": [
                 {
-                    "patterns": "pipe-cap-vert",
+                   "pattern": "pipe-cap-vert",
                     "ranges": [
                         [0, 0]
                     ]
                 },
                 {
-                    "patterns": "pipe-section-vert",
+                   "pattern": "pipe-section-vert",
                     "ranges": [
                         [
                             0, 1,
@@ -310,15 +311,15 @@
         },
 
         "pipe-3h": {
-            "backgrounds": [
+            "tiles": [
                 {
-                    "patterns": "pipe-cap-vert",
+                   "pattern": "pipe-cap-vert",
                     "ranges": [
                         [0, 0]
                     ]
                 },
                 {
-                    "patterns": "pipe-section-vert",
+                   "pattern": "pipe-section-vert",
                     "ranges": [
                         [
                             0, 1,
@@ -329,15 +330,15 @@
             ]
         },
         "pipe-4h": {
-            "backgrounds": [
+            "tiles": [
                 {
-                    "patterns": "pipe-cap-vert",
+                   "pattern": "pipe-cap-vert",
                     "ranges": [
                         [0, 0]
                     ]
                 },
                 {
-                    "patterns": "pipe-section-vert",
+                   "pattern": "pipe-section-vert",
                     "ranges": [
                         [
                             0, 1,
