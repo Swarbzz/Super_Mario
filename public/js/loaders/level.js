@@ -55,23 +55,25 @@ function* expandRanges(ranges) {
     }
 }
 
-function createTiles(level, tiles, patterns, offsetX = 0, offsetY = 0) {
-
-    tiles.forEach(tile => {
-        for (const {x, y} of expandRanges(tile.ranges)) {
-            const derivedX = x + offsetX;
-            const derivedY = y + offsetY;
-    
-            if (tile.pattern) {
-                console.log('Pattern detected', patterns[tile.pattern]);
-                const tiles = patterns[tile.pattern].tiles;
-                createTiles(level, tiles, patterns, derivedX, derivedY);
-            } else {
-                level.tiles.set(derivedX, derivedY, {
-                    name: tile.name,
-                    type: tile.type,
-                });
+function createTiles(level, tiles, patterns) {
+    function walkTiles(tiles, offsetX, offsetY) {
+        for (const tile of tiles) {
+            for (const {x, y} of expandRanges(tile.ranges)) {
+                const derivedX = x + offsetX;
+                const derivedY = y + offsetY;
+        
+                if (tile.pattern) {
+                    const tiles = patterns[tile.pattern].tiles;
+                    walkTiles(tiles, derivedX, derivedY);
+                } else {
+                    level.tiles.set(derivedX, derivedY, {
+                        name: tile.name,
+                        type: tile.type,
+                    });
+                }
             }
         }
-    });
+    }
+
+    walkTiles(tiles, 0, 0);
 }
