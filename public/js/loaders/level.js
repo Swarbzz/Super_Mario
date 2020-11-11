@@ -1,3 +1,4 @@
+import {Matrix} from'../math.js';
 import Level from '../level.js';
 import {createBackgroundLayer, createSpriteLayer} from '../layers.js';
 import {loadJSON, loadSpriteSheet} from '../Loaders.js';
@@ -11,14 +12,12 @@ export function loadLevel(name) {
     .then(([levelSpec, backgroundSprites]) => {
         const level = new Level();
 
-        for (const {tile, x, y} of expandTiles(levelSpec.tiles, levelSpec.pattern)) {
-            level.tiles.set(x, y, {
-                name: tile.name,
-                type: tile.type,
-            });
-        }
+        const collitionGrid = createCollitionGrid(levelSpec.tiles, levelSpec.pattern);
+        level.setCollisionGrid(collitionGrid);
 
-        const backgroundLayer = createBackgroundLayer(level, backgroundSprites);
+        const backgroundGrid = createBackgroundGrid(levelSpec.tiles, levelSpec.pattern);
+
+        const backgroundLayer = createBackgroundLayer(level, backgroundGrid, backgroundSprites);
         level.comp.layers.push(backgroundLayer);
 
         const spriteLayer = createSpriteLayer(level.entities);
@@ -26,6 +25,24 @@ export function loadLevel(name) {
 
         return level;
     });
+}
+
+function createCollitionGrid(tiles, patterns) {
+    const grid = new Matrix();
+
+    for (const {tile, x, y} of expandTiles(tiles, patterns)) {
+        grid.set(x, y, {type: tile.type});
+    }
+    return grid;
+}
+
+function createBackgroundGrid(tiles, patterns) {
+    const grid = new Matrix();
+
+    for (const {tile, x, y} of expandTiles(tiles, patterns)) {
+        grid.set(x, y, {name: tile.name});
+    }
+    return grid;
 }
 
 function* expandSpan(xStart, xLen, yStart, yLen) { // * makes it a generator function
