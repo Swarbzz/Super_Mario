@@ -182,10 +182,13 @@
                         [185, 8, 11],
                         [184, 9, 12]
                     ]
-                },
-
+                }
+            ]
+        },
+        {
+            "tiles": [
                 {
-                "pattern": "pipe-2h",
+                    "pattern": "pipe-2h",
                     "ranges": [
                         [35, 11],
                         [167, 11],
@@ -193,20 +196,20 @@
                     ]
                 },
                 {
-                "pattern": "pipe-3h",
+                    "pattern": "pipe-3h",
                     "ranges": [
                         [45, 10]
                     ]
                 },
                 {
-                "pattern": "pipe-4h",
+                    "pattern": "pipe-4h",
                     "ranges": [
                         [53, 9],
                         [64, 9]
                     ]
                 },
                 {
-                "pattern": "cloud-single",
+                    "pattern": "cloud-single",
                     "ranges": [
                         [2, 2],
                         [25 ,2],
