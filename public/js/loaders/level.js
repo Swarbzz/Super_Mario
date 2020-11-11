@@ -12,10 +12,10 @@ export function loadLevel(name) {
     .then(([levelSpec, backgroundSprites]) => {
         const level = new Level();
 
-        const collitionGrid = createCollitionGrid(levelSpec.tiles, levelSpec.pattern);
+        const collitionGrid = createCollitionGrid(levelSpec.layers[0].tiles, levelSpec.pattern);
         level.setCollisionGrid(collitionGrid);
 
-        const backgroundGrid = createBackgroundGrid(levelSpec.tiles, levelSpec.pattern);
+        const backgroundGrid = createBackgroundGrid(levelSpec.layers[0].tiles, levelSpec.pattern);
 
         const backgroundLayer = createBackgroundLayer(level, backgroundGrid, backgroundSprites);
         level.comp.layers.push(backgroundLayer);
