@@ -12,8 +12,11 @@ export function loadLevel(name) {
     .then(([levelSpec, backgroundSprites]) => {
         const level = new Level();
 
-        const collitionGrid = createCollitionGrid(levelSpec.layers[0].tiles, levelSpec.pattern);
-        level.setCollisionGrid(collitionGrid);
+        const mergedTiles = levelSpec.layers.reduce((mergedTiles, layerSpec) => {
+            return mergedTiles.concat(layerSpec.tiles);
+        }, []);
+        const collitionGrid = createCollitionGrid(mergedTiles, levelSpec.pattern);
+        level.setCollisionGrid(collitionGrid); // merging the layers so that the pipe have collision
 
         levelSpec.layers.forEach(layer => {
             const backgroundGrid = createBackgroundGrid(layer.tiles, levelSpec.pattern);
