@@ -13,8 +13,7 @@ export function loadMario() {
 }
 
 function createMarioFactory(sprite) {
-
-    const runAnim = createAnim(['run-1', 'run-2', 'run-3'], 6);
+    const runAnim = sprite.animations.get('run');
     function routeFrame(mario) {
         if (mario.jump.falling) {
             return 'jump'; //jump animation
