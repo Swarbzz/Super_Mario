@@ -2,7 +2,6 @@ import Entity from '../Entity.js';
 import Go from '../traits/Go.js';
 import Jump from '../traits/Jump.js';
 import {loadSpriteSheet} from '../Loaders.js';
-import {createAnim} from '../anim.js';
 
 const FAST_DRAG = 1/5000;
 const SLOW_DRAG = 1/1500;
@@ -42,13 +41,12 @@ function createMarioFactory(sprite) {
         mario.size.set(14, 16);
 
         mario.addTrait(new Go());
-        mario.go.dragFactor = SLOW_DRAG;
-        
         mario.addTrait(new Jump());
 
         mario.turbo = setTurboState;
-
         mario.draw = drawMario;
+
+        mario.turbo(false); // basically goes to SLOW_DRAG
 
         return mario;
     }
