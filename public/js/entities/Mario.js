@@ -13,6 +13,24 @@ export function loadMario() {
 }
 
 function createMarioFactory(sprite) {
+
+    console.log('Creatng support functions');
+    const runAnim = createAnim(['run-1', 'run-2', 'run-3'], 6);
+    function routeFrame(mario) {
+        if (mario.jump.falling) {
+            return 'jump'; //jump animation
+        }
+
+        if (mario.go.distance > 0) {
+            if (mario.vel.x > 0 && mario.go.dir < 0 || mario.vel.x < 0 && mario.go.dir > 0) {
+                return 'break'; // return the animation frame of mario turning while running
+            }
+            return runAnim(mario.go.distance);
+        }
+
+        return 'idle';
+    }
+
     return function createMario() {
         const mario = new Entity();
         mario.size.set(14, 16);
@@ -24,22 +42,6 @@ function createMarioFactory(sprite) {
 
         mario.turbo = function setTurboState(turboOn) {
             this.go.dragFactor = turboOn ? FAST_DRAG : SLOW_DRAG;
-        }
-
-        const runAnim = createAnim(['run-1', 'run-2', 'run-3'], 6);
-        function routeFrame(mario) {
-            if (mario.jump.falling) {
-                return 'jump'; //jump animation
-            }
-
-            if (mario.go.distance > 0) {
-                if (mario.vel.x > 0 && mario.go.dir < 0 || mario.vel.x < 0 && mario.go.dir > 0) {
-                    return 'break'; // return the animation frame of mario turning while running
-                }
-                return runAnim(mario.go.distance);
-            }
-
-            return 'idle';
         }
 
         mario.draw = function drawMario(context) {
