@@ -5,6 +5,7 @@ import {loadMario} from './entities/Mario.js';
 import {loadGoomba} from './entities/Goomba.js';
 import {loadKoopa} from './entities/Koopa.js';
 import {setupKeyboard} from './input.js';
+import {createCollisionLayer} from './layers.js';
 
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
@@ -51,6 +52,8 @@ Promise.all([
     // The code above will spawn marios when he jumps, a wee bit of a laugh
 
     level.entities.add(mario);
+
+    level.comp.layers.push(createCollisionLayer(level));
 
     const input = setupKeyboard(mario);
     input.listenTo(window);
