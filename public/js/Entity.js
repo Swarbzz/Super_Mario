@@ -3,6 +3,8 @@ import {Vec2} from './math.js';
 export const Sides = {
     TOP: Symbol('top'), // A symbol is a unique marker in a code, that cannot be compared to anything else in the code
     BOTTOM: Symbol('bottom'),
+    LEFT: Symbol('left'),
+    RIGHT: Symbol('right'),
 };
 
 export class Trait {
