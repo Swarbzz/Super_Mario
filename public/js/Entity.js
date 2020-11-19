@@ -1,4 +1,5 @@
 import {Vec2} from './math.js';
+import BoundingBox from './BoundingBox.js';
 
 export const Sides = {
     TOP: Symbol('top'), // A symbol is a unique marker in a code, that cannot be compared to anything else in the code
@@ -27,6 +28,7 @@ export default class Entity {
         this.vel = new Vec2(0, 0);
         this.size = new Vec2(0, 0);
         this.offset = new Vec2(0, 0);
+        this.bounds = new BoundingBox(this.pos, this.size, this.offset);
         this.lifetime = 0;
 
         this.traits = [];
