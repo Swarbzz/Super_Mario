@@ -11,6 +11,19 @@ function setupCollision(levelSpec, level) {
     level.setCollisionGrid(collitionGrid); // merging the layers so that the pipe have collision
 }
 
+function setupBackgrounds(levelSpec, level, backgroundSprites) {
+    levelSpec.layers.forEach(layer => {
+        const backgroundGrid = createBackgroundGrid(layer.tiles, levelSpec.pattern);
+        const backgroundLayer = createBackgroundLayer(level, backgroundGrid, backgroundSprites);
+        level.comp.layers.push(backgroundLayer);
+    });
+}
+
+function setupEntities(levelSpec, level) {
+    const spriteLayer = createSpriteLayer(level.entities);
+    level.comp.layers.push(spriteLayer);
+}
+
 export function loadLevel(name) {
     return loadJSON(`/levels/${name}.json`)
     .then(levelSpec => Promise.all([
@@ -21,15 +34,8 @@ export function loadLevel(name) {
         const level = new Level();
 
         setupCollision(levelSpec, level);
-
-        levelSpec.layers.forEach(layer => {
-            const backgroundGrid = createBackgroundGrid(layer.tiles, levelSpec.pattern);
-            const backgroundLayer = createBackgroundLayer(level, backgroundGrid, backgroundSprites);
-            level.comp.layers.push(backgroundLayer);
-        });
-
-        const spriteLayer = createSpriteLayer(level.entities);
-        level.comp.layers.push(spriteLayer);
+        setupBackgrounds(levelSpec, level, backgroundSprites);
+        setupEntities(levelSpec, level);
 
         return level;
     });
