@@ -19,26 +19,30 @@ function setupBackgrounds(levelSpec, level, backgroundSprites) {
     });
 }
 
-function setupEntities(levelSpec, level) {
+function setupEntities(levelSpec, level, entityFactory) {
+    console.log(levelSpec.entities, entityFactory)
+
     const spriteLayer = createSpriteLayer(level.entities);
     level.comp.layers.push(spriteLayer);
 }
 
-export function loadLevel(name) {
-    return loadJSON(`/levels/${name}.json`)
-    .then(levelSpec => Promise.all([
-        levelSpec,
-        loadSpriteSheet(levelSpec.spriteSheet),
-    ]))
-    .then(([levelSpec, backgroundSprites]) => {
-        const level = new Level();
+export function createLevelLoader(entityFactory) {
+    return function loadLevel(name) {
+        return loadJSON(`/levels/${name}.json`)
+        .then(levelSpec => Promise.all([
+            levelSpec,
+            loadSpriteSheet(levelSpec.spriteSheet),
+        ]))
+        .then(([levelSpec, backgroundSprites]) => {
+            const level = new Level();
 
-        setupCollision(levelSpec, level);
-        setupBackgrounds(levelSpec, level, backgroundSprites);
-        setupEntities(levelSpec, level);
+            setupCollision(levelSpec, level);
+            setupBackgrounds(levelSpec, level, backgroundSprites);
+            setupEntities(levelSpec, level, entityFactory);
 
-        return level;
-    });
+            return level;
+        });
+    }
 }
 
 function createCollitionGrid(tiles, patterns) {

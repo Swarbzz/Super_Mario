@@ -1,6 +1,6 @@
 import Camera from './Camera.js';
 import Timer from './Timer.js';
-import {loadLevel} from './loaders/level.js';
+import {createLevelLoader} from './loaders/level.js';
 import {loadEntities} from './entities.js';
 import {setupKeyboard} from './input.js';
 import {createCollisionLayer} from './layers.js';
@@ -10,21 +10,21 @@ const context = canvas.getContext('2d');
 
 Promise.all([
     loadEntities(),
-    loadLevel('1-1'),
+    createLevelLoader()('1-1'),
 ])
-.then(([entity, level]) => {
+.then(([entityFactory, level]) => {
 
     const camera = new Camera();
     window.camera = camera;
 
-    const mario = entity.mario();
+    const mario = entityFactory.mario();
     mario.pos.set(64, 64);
 
-    const goomba = entity.goomba();
+    const goomba = entityFactory.goomba();
     goomba.pos.x = 220;
     level.entities.add(goomba);
 
-    const koopa = entity.koopa();
+    const koopa = entityFactory.koopa();
     koopa.pos.x = 260;
     level.entities.add(koopa)
 
