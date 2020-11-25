@@ -13,7 +13,9 @@ class Behaviour extends Trait {
     }
 
     collides(us, them) {
-        us.pendulumWalk.speed = 0;
+        if (them.stomper) { //if they (mario in this case) has the trait stomper then behave in this way
+            us.pendulumWalk.speed = 0;
+        }
     }
 }
 
