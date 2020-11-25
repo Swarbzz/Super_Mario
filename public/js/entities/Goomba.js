@@ -1,4 +1,5 @@
 import Entity, {Sides, Trait} from '../Entity.js';
+import Killable from '../traits/Killable.js';
 import PendulumWalk from '../traits/PendulumWalk.js';
 import {loadSpriteSheet} from '../Loaders.js';
 
@@ -14,6 +15,7 @@ class Behaviour extends Trait {
 
     collides(us, them) {
         if (them.stomper) { //if they (mario in this case) has the trait stomper then behave in this way
+            us.killable.kill();
             us.pendulumWalk.speed = 0;
         }
     }
@@ -22,8 +24,16 @@ class Behaviour extends Trait {
 function createGoombaFactory(sprite) {
     const walkAnim = sprite.animations.get('walk');
 
+    function routeAnim(goomba) {
+        if (goomba.killable.dead) {
+            return 'flat';
+        }
+
+        return walkAnim(goomba.lifetime);
+    }
+
     function drawGoomba(context) {
-        sprite.draw(walkAnim(this.lifetime), context, 0, 0);
+        sprite.draw(routeAnim(this), context, 0, 0);
     }
 
     return function createGoomba() {
@@ -32,6 +42,7 @@ function createGoombaFactory(sprite) {
 
         goomba.addTrait(new PendulumWalk());
         goomba.addTrait(new Behaviour());
+        goomba.addTrait(new Killable());
 
         goomba.draw = drawGoomba;
 
