@@ -21,7 +21,7 @@ export class Trait {
     }
 
     update() {
-        
+
     }
 }
 
@@ -54,9 +54,9 @@ export default class Entity {
         });
     }
 
-    update(deltaTime) {
+    update(deltaTime, level) {
         this.traits.forEach(trait => {
-            trait.update(this, deltaTime);
+            trait.update(this, deltaTime, level);
         });
 
         this.lifetime += deltaTime;
