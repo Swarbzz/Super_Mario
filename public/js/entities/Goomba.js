@@ -1,10 +1,20 @@
-import Entity from '../Entity.js';
+import Entity, {Sides, Trait} from '../Entity.js';
 import PendulumWalk from '../traits/PendulumWalk.js';
 import {loadSpriteSheet} from '../Loaders.js';
 
 export function loadGoomba() {
     return loadSpriteSheet('goomba') // loads the json
     .then(createGoombaFactory);
+}
+
+class Behaviour extends Trait {
+    constructor() {
+        super('behaviour');
+    }
+
+    collides(us, them) {
+        us.pendulumWalk.speed = 0;
+    }
 }
 
 function createGoombaFactory(sprite) {
@@ -19,6 +29,7 @@ function createGoombaFactory(sprite) {
         goomba.size.set(16, 16);
 
         goomba.addTrait(new PendulumWalk());
+        goomba.addTrait(new Behaviour());
 
         goomba.draw = drawGoomba;
 
