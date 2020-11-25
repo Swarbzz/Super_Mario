@@ -14,6 +14,10 @@ class Behaviour extends Trait {
     }
 
     collides(us, them) {
+        if (us.killable.dead) {
+            return;
+        }
+
         if (them.stomper) { //if they (mario in this case) has the trait stomper then behave in this way
             us.killable.kill();
             them.stomper.bounce();
