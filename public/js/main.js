@@ -5,17 +5,15 @@ import {loadEntities} from './entities.js';
 import {setupKeyboard} from './input.js';
 import {createCollisionLayer} from './layers.js';
 
-const canvas = document.getElementById('screen');
-const context = canvas.getContext('2d');
+async function main(canvas) {
+    const context = canvas.getContext('2d');
 
-Promise.all([
-    loadEntities(),
-    createLevelLoader()('1-1'),
-])
-.then(([entityFactory, level]) => {
+    const entityFactory = await loadEntities();
+    const loadLevel = await createLevelLoader(entityFactory);
+
+    const level = await loadLevel('1-1');
 
     const camera = new Camera();
-    window.camera = camera;
 
     const mario = entityFactory.mario();
     mario.pos.set(64, 64);
@@ -67,4 +65,7 @@ Promise.all([
     }
 
     timer.start();
-});
+}
+
+const canvas = document.getElementById('screen');
+main(canvas);
