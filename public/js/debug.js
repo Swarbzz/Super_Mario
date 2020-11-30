@@ -21,4 +21,3 @@ export function setupMouseControl(canvas, entity, camera) {
       event.preventDefault();
   });
 }
-//test

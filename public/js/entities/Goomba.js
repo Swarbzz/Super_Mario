@@ -19,9 +19,11 @@ class Behaviour extends Trait {
         }
 
         if (them.stomper) { //if they (mario in this case) has the trait stomper then behave in this way
-            us.killable.kill();
-            them.stomper.bounce();
-            us.pendulumWalk.speed = 0;
+            if (them.vel.y > us.vel.y){
+                us.killable.kill();
+                them.stomper.bounce();
+                us.pendulumWalk.speed = 0;
+            }
         }
     }
 }
